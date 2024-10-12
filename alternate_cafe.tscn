@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://lr4e0chikgsr"]
+[gd_scene load_steps=10 format=3 uid="uid://bfo5o1yqpsb7o"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_axk1x"]
-[ext_resource type="Script" path="res://item.gd" id="2_n3lfb"]
-[ext_resource type="Script" path="res://door_trigger.gd" id="3_sxnlg"]
+[ext_resource type="Script" path="res://player.gd" id="1_whwo6"]
+[ext_resource type="Script" path="res://item.gd" id="2_do6sq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ueunb"]
 size = Vector2(76, 76)
@@ -25,17 +24,12 @@ size = Vector2(69, 699)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bpo1b"]
 size = Vector2(75, 700)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cbqy"]
-size = Vector2(60.5, 90.5)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_agx6q"]
-
 [node name="Cafe" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(577, 325)
+position = Vector2(299, 144)
 motion_mode = 1
-script = ExtResource("1_axk1x")
+script = ExtResource("1_whwo6")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_ueunb")
@@ -44,14 +38,16 @@ shape = SubResource("RectangleShape2D_ueunb")
 texture = SubResource("PlaceholderTexture2D_uvgul")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(277.46, 209.56)
 enabled = false
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+editor_draw_limits = true
 
 [node name="Item" type="Sprite2D" parent="."]
 position = Vector2(473, 346)
 texture = SubResource("PlaceholderTexture2D_ebso3")
-script = ExtResource("2_n3lfb")
+script = ExtResource("2_do6sq")
 
 [node name="Counter" type="StaticBody2D" parent="."]
 position = Vector2(576, 610)
@@ -94,17 +90,3 @@ shape = SubResource("RectangleShape2D_gyvug")
 
 [node name="Sprite2D" type="Sprite2D" parent="Wall2"]
 texture = SubResource("PlaceholderTexture2D_bpo1b")
-
-[node name="BackDoorTrigger" type="Area2D" parent="."]
-position = Vector2(291, 67)
-script = ExtResource("3_sxnlg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackDoorTrigger"]
-shape = SubResource("RectangleShape2D_7cbqy")
-
-[node name="Sprite2D" type="Sprite2D" parent="BackDoorTrigger"]
-scale = Vector2(64, 94)
-texture = SubResource("PlaceholderTexture2D_agx6q")
-
-[connection signal="body_entered" from="BackDoorTrigger" to="Player" method="_on_back_door_trigger_body_entered"]
-[connection signal="body_exited" from="BackDoorTrigger" to="Player" method="_on_back_door_trigger_body_exited"]
