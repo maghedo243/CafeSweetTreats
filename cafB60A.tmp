@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://lr4e0chikgsr"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_axk1x"]
+[ext_resource type="Script" path="res://item.gd" id="2_n3lfb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ueunb"]
+size = Vector2(76, 76)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uvgul"]
+size = Vector2(75, 75)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ebso3"]
+size = Vector2(10, 10)
+
+[node name="Cafe" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(598, 333)
+motion_mode = 1
+script = ExtResource("1_axk1x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_ueunb")
+
+[node name="Player" type="Sprite2D" parent="CharacterBody2D"]
+texture = SubResource("PlaceholderTexture2D_uvgul")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Item" type="Sprite2D" parent="."]
+position = Vector2(494, 354)
+texture = SubResource("PlaceholderTexture2D_ebso3")
+script = ExtResource("2_n3lfb")
