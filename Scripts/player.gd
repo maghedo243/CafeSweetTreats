@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 var speed = 200
-var atBackDoor = false;
-var atFrontDoor = false;
-var movable = true;
+var atBackDoor = false
+var atFrontDoor = false
+var atCounterDoor = false
+var movable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,24 +33,34 @@ func _physics_process(delta: float) -> void:
 		call_deferred("sceneChange")
 	elif self.velocity.y > 0 and atFrontDoor:
 		call_deferred("sceneChange")
+	elif self.velocity.y > 0 and atCounterDoor:
+		call_deferred("sceneChange")
 
 
 func _on_back_door_trigger_body_entered(body: Node2D) -> void:
 	if body == self:
-		atBackDoor = true;
+		atBackDoor = true
 		
 func _on_back_door_trigger_body_exited(body: Node2D) -> void:
 	if body == self:
-		atBackDoor = false;
+		atBackDoor = false
 
 func _on_front_door_trigger_body_entered(body: Node2D) -> void:
 	if body == self:
-		atFrontDoor = true;
+		atFrontDoor = true
 
 func _on_front_door_trigger_body_exited(body: Node2D) -> void:
 	if body == self:
-		atFrontDoor = false;
+		atFrontDoor = false
+		
+func _on_counter_door_trigger_body_entered(body: Node2D) -> void:
+	if body == self:
+		atCounterDoor = true
 
+func _on_counter_door_trigger_body_exited(body: Node2D) -> void:
+	if body == self:
+		atCounterDoor = false
+	
 func sceneChange():
 	if atBackDoor:
 		#TransitionScreen.transition()
@@ -59,6 +70,8 @@ func sceneChange():
 		#TransitionScreen.transition()
 		#await TransitionScreen.on_fadeout_finished
 		get_tree().change_scene_to_file("res://Scenes/alternate_cafe.tscn")
+	elif atCounterDoor:
+		get_tree().change_scene_to_file("res://Scenes/whole_cafe.tscn")
 		
 func collectedItem(name):
 	if name == "SweetTreat":
@@ -66,7 +79,7 @@ func collectedItem(name):
 		TransitionScreen.transition()
 		await TransitionScreen.on_fadeout_finished
 		get_tree().change_scene_to_file("res://Scenes/the_alternate_back.tscn")
-		await TransitionScreen.on_fadeout_finished
+		await TransitionScreen.on_fadein_finished
 		movable = true
 		
 	

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0soofpvamit0"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_1qx4w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qa3xt"]
+size = Vector2(76, 76)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0j2bo"]
+size = Vector2(75, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki1wf"]
+size = Vector2(72, 999)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_e5vma"]
+size = Vector2(75, 1000)
+
+[node name="whole_cafe" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(577, 325)
+motion_mode = 1
+script = ExtResource("1_1qx4w")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_qa3xt")
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture = SubResource("PlaceholderTexture2D_0j2bo")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Counter" type="StaticBody2D" parent="."]
+position = Vector2(576, 37)
+rotation = 1.5708
+scale = Vector2(1, 1.16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Counter"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ki1wf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Counter"]
+texture = SubResource("PlaceholderTexture2D_e5vma")
