@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://yl4hij5n2my0"]
+[gd_scene load_steps=11 format=3 uid="uid://b8meb5mnspj6n"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_8xdme"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_anjnc"]
+[ext_resource type="Script" path="res://Scripts/door_trigger.gd" id="2_mhxlp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0at43"]
 size = Vector2(72, 999)
@@ -20,7 +21,12 @@ size = Vector2(76, 76)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k1uen"]
 size = Vector2(75, 75)
 
-[node name="TheBack" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0nuo"]
+size = Vector2(60.5, 90.5)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3xube"]
+
+[node name="TheAlternateBack" type="Node2D"]
 
 [node name="FrontWall" type="StaticBody2D" parent="."]
 position = Vector2(576, 610)
@@ -67,9 +73,9 @@ shape = SubResource("RectangleShape2D_tqlh6")
 texture = SubResource("PlaceholderTexture2D_pcu3r")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(253, 529)
+position = Vector2(580, -471)
 motion_mode = 1
-script = ExtResource("1_8xdme")
+script = ExtResource("1_anjnc")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_2ba0k")
@@ -85,3 +91,17 @@ limit_bottom = 625
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 editor_draw_limits = true
+
+[node name="FrontDoorTrigger" type="Area2D" parent="."]
+position = Vector2(252, 601)
+script = ExtResource("2_mhxlp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrontDoorTrigger"]
+shape = SubResource("RectangleShape2D_b0nuo")
+
+[node name="Sprite2D" type="Sprite2D" parent="FrontDoorTrigger"]
+scale = Vector2(64, 94)
+texture = SubResource("PlaceholderTexture2D_3xube")
+
+[connection signal="body_entered" from="FrontDoorTrigger" to="Player" method="_on_front_door_trigger_body_entered"]
+[connection signal="body_exited" from="FrontDoorTrigger" to="Player" method="_on_front_door_trigger_body_exited"]

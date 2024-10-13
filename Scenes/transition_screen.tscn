@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://bos855giomgm5"]
+
+[ext_resource type="Script" path="res://Scenes/transition_screen.gd" id="1_4ucsc"]
+
+[sub_resource type="Animation" id="Animation_v6qrs"]
+resource_name = "fade_to_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jvak6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_clt5w"]
+resource_name = "fade_to_normal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3u14a"]
+resource_name = "long_fade_to_black"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pjyau"]
+resource_name = "long_fade_to_normal"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_77y0p"]
+_data = {
+"RESET": SubResource("Animation_jvak6"),
+"fade_to_black": SubResource("Animation_v6qrs"),
+"fade_to_normal": SubResource("Animation_clt5w"),
+"long_fade_to_black": SubResource("Animation_3u14a"),
+"long_fade_to_normal": SubResource("Animation_pjyau")
+}
+
+[node name="transition_screen" type="CanvasLayer"]
+scale = Vector2(3.535, 3.535)
+transform = Transform2D(3.535, 0, 0, 3.535, 0, 0)
+follow_viewport_scale = 100.0
+script = ExtResource("1_4ucsc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(24.6, 14.84)
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_77y0p")
+}
