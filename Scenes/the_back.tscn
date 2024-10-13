@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://yl4hij5n2my0"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_2tps7"]
+[ext_resource type="Script" path="res://sweettreat.gd" id="2_ihl41"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0at43"]
+size = Vector2(72, 999)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ulffs"]
+size = Vector2(75, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqlh6"]
+size = Vector2(69, 699)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pcu3r"]
+size = Vector2(75, 700)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ba0k"]
+size = Vector2(76, 76)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k1uen"]
+size = Vector2(75, 75)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_35eo7"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1d32i"]
+
+[node name="TheBack" type="Node2D"]
+
+[node name="FrontWall" type="StaticBody2D" parent="."]
+position = Vector2(576, 610)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrontWall"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_0at43")
+
+[node name="Sprite2D" type="Sprite2D" parent="FrontWall"]
+texture = SubResource("PlaceholderTexture2D_ulffs")
+
+[node name="BackWall" type="StaticBody2D" parent="."]
+position = Vector2(576, -707)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackWall"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_0at43")
+
+[node name="Sprite2D" type="Sprite2D" parent="BackWall"]
+texture = SubResource("PlaceholderTexture2D_ulffs")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(39, -47.935)
+scale = Vector2(1, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_tqlh6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+texture = SubResource("PlaceholderTexture2D_pcu3r")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(1113, -47.935)
+scale = Vector2(1, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_tqlh6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+texture = SubResource("PlaceholderTexture2D_pcu3r")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(253, 529)
+motion_mode = 1
+script = ExtResource("1_2tps7")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_2ba0k")
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture = SubResource("PlaceholderTexture2D_k1uen")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = -740
+limit_right = 1150
+limit_bottom = 625
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="SweetTreat" type="Area2D" parent="."]
+position = Vector2(577, -508)
+scale = Vector2(1.76, 1.76)
+script = ExtResource("2_ihl41")
+
+[node name="Sprite" type="Sprite2D" parent="SweetTreat"]
+texture = SubResource("PlaceholderTexture2D_35eo7")
+
+[node name="Hitbox" type="CollisionShape2D" parent="SweetTreat"]
+scale = Vector2(0.745, 0.745)
+shape = SubResource("CircleShape2D_1d32i")
